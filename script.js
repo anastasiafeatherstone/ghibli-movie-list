@@ -49,3 +49,30 @@ function showSlider(type) {
     next.click();
   }, timeAutoNext);
 }
+
+// JavaScript for handling modals
+document.addEventListener("DOMContentLoaded", function () {
+  var modal = document.getElementById("trailerModal");
+  var iframe = document.getElementById("trailerIframe");
+  var close = document.getElementsByClassName("close")[0];
+
+  document.body.addEventListener("click", function (event) {
+    if (event.target && event.target.classList.contains("trailerButton")) {
+      var videoUrl = event.target.getAttribute("data-video-url");
+      iframe.src = videoUrl;
+      modal.style.display = "block";
+    }
+  });
+
+  close.onclick = function () {
+    modal.style.display = "none";
+    iframe.src = ""; // Stop the video when the modal is closed
+  };
+
+  window.onclick = function (event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+      iframe.src = ""; // Stop the video when the modal is closed
+    }
+  };
+});
